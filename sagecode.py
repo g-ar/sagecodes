@@ -39,3 +39,48 @@ for i in range(10):
 
 f(n,k)=1/n*k^(n-1)*gamma(k)^n/gamma(n*k)
 N(f(4,1/4))  # Probability of (sum x_i^4) < 1   i=1..4
+
+
+# (4)
+# generalized birthday problem
+# bins>=n
+nn=10
+bins=30
+plst=Partitions(nn,max_length=nn).list()
+summ=0
+tot=0
+expe=0
+for p in plst:
+    tmp=(p+[0]*200)[:bins]
+    pr=1
+    mt1=0
+    for i in range(bins+1):
+        at=tmp.count(i)
+        if i>1:
+            mt1 += at
+        pr *= factorial(at)*factorial(i)^at
+    summ+= factorial(nn)*factorial(bins)/bins^nn / pr 
+    expe+=mt1*factorial(nn)*factorial(bins)/bins^nn / pr  
+print summ, expe, N(expe)
+
+# (5)
+# Partition g.f., odd no of even parts, <=10
+f1=1
+f2=1
+for i in range(1,11):
+    if i<6:
+        f1*=(1-x^(2*i))/(1+x^(2*i))
+    f2*=1/(1-x^i)
+print ((1-f1)*f2/2).full_simplify()    
+taylor((1-f1)*f2/2-x^2/(1-x^2),x,0,40) 
+
+# (6) 
+# derives the generating function for a given linear recurrence
+# alst: coefficients from highest to lowest order
+# initvals: initial values a0, a1,..
+def get_gf(alst,initvals):
+    nn=len(alst)
+    Am = zero_matrix(QQ,nn-1,1).augment(identity_matrix(nn-1)).stack(matrix(QQ,alst[::-1]))
+    Bm = matrix(QQ,initvals)
+    return (((identity_matrix(nn)-x*Am).inverse()*Bm.transpose())[0,0]).full_simplify()
+print get_gf([3/2,0,-1/2],[0,1,2])  
