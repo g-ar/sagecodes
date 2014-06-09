@@ -56,3 +56,27 @@ while i<n:
     summ += ax
     i+=1
 print summ.subs(x=n)
+
+# (10) https://math.stackexchange.com/questions/827568/how-many-ways-can-n-spaces-be-used-with-blocks-of-size-le-n-or-leave-empty
+# Getting the sequence to examine it:
+
+for nn in range(16):
+    cnt=0
+    for i in range(nn+1):
+        plst=Partitions(i).list()
+        for p in plst:
+            cnt += Permutations(p+[0]*(nn-i)).cardinality()
+    print cnt,
+    
+# (11) https://math.stackexchange.com/questions/823422/what-is-the-number-of-condensed-products-in-each-term-of-this-sequence
+# Counting it by counting!
+
+var('k');
+q = var(','.join('q%s'%i for i in range(20)));
+nn=16
+a=[0]*20
+a[0]=q0
+for i in range(nn):
+    a[i+1]=expand(q[i+1]*sum([a[k]*a[i-k] for k in [0..i]]))  
+    print str(a[i]).count('+')+1,     
+print str(a[nn]).count('+')+1
