@@ -80,3 +80,18 @@ for i in range(nn):
     a[i+1]=expand(q[i+1]*sum([a[k]*a[i-k] for k in [0..i]]))  
     print str(a[i]).count('+')+1,     
 print str(a[nn]).count('+')+1
+
+# (12) https://math.stackexchange.com/questions/835458/expected-value-of-two-successive-heads-or-tails-stuck-on-computation
+# An absorbing markov chain
+
+var('p q')
+q=1-p
+am=matrix([
+[0,p,q,0,0],
+[0,0,q,p,0],
+[0,p,0,0,q],
+[0,0,0,1,0],
+[0,0,0,0,1]
+])
+ami=(identity_matrix(3)-am[:3,:3]).inverse()[0,:]
+f(p)=sum(ami.list()).full_simplify()
