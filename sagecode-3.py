@@ -77,7 +77,7 @@ fht=1/(1-(t+h*(t+h*(t+h*(t+h*(t+h*t))))))*(1+h*(1+h*(1+h*(1+h*(1+h)))))
 fhtt=taylor(fht,(h,0),(t,0),25)
 fhtt.coeff(t,8).coeff(h,17)/2^25
 
-# (17) http://math.stackexchange.com/questions/850857/an-archery-game/851331#851331
+# (17) http://math.stackexchange.com/questions/850857/an-archery-game/
 
 def prob_consecutive(probA=1/2, probB=1/2, numA=2, numB=3, winner=0):
     '''
