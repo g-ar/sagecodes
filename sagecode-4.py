@@ -50,3 +50,13 @@ for i in range(trials):
     if ''.join(rlst).count('1234134')==3:        
         cnt3+=1
 print cnt1/float(trials),cnt2/float(trials),cnt3/float(trials)
+
+# (19) https://math.stackexchange.com/questions/911571/probability-rolling-a-dice-5-times/
+
+var('y z')
+ff = expand((2*x+3*y+z)^5)
+summ = 0
+for i in range(0,5):
+    for j in range(i+1,6):
+        summ += ff.coeff(x,j).coeff(z,i).subs(y=1)
+print summ/6^5

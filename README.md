@@ -45,3 +45,5 @@ This directory contains computation codes for Sagemath.
    `sagecode-4.py`
 
 18. http://math.stackexchange.com/questions/854039/biology-how-to-find-the-probability-of-randomly-generating-multiple-sequential
+
+19. https://math.stackexchange.com/questions/911571/probability-rolling-a-dice-5-times/
