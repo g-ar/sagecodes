@@ -60,3 +60,41 @@ for i in range(0,5):
     for j in range(i+1,6):
         summ += ff.coeff(x,j).coeff(z,i).subs(y=1)
 print summ/6^5
+
+# (20) https://math.stackexchange.com/questions/1334544/off-by-1-lottery-probability/
+# memoization decorator was taken from 
+# https://code.activestate.com/recipes/578231-probably-the-fastest-memoization-decorator-in-the-/
+
+def memoize(f):
+    """ Memoization decorator for functions taking one or more arguments. """
+    class memodict(dict):
+        def __init__(self, f):
+            self.f = f
+        def __call__(self, *args):
+            return self[args]
+        def __missing__(self, key):
+            ret = self[key] = self.f(*key)
+            return ret
+    return memodict(f)
+
+@memoize
+def T(n,k):
+    if n == 0 and k == 0:
+        return 1
+    if n == 1 and k == 0:
+        return 1
+    if n == 2 and k == 1:
+        return 1                
+    if n == 2 and k == 0:
+        return 1   
+    if n == 1 and k== 1:
+        return 0
+    if n == 2 and k == 2:
+        return 0
+    if n < k or k< 0:     
+        return 0
+    return T(n-1,k) + 2*T(n-1,k-1) + T(n-2,k-1) - T(n-2,k-2)
+nn = 50
+kk = 6
+pr = T(nn+1,kk) / binomial(nn,kk)^2
+print "Probability of winning is %.10f" % pr
