@@ -47,3 +47,5 @@ This directory contains computation codes for Sagemath.
 18. http://math.stackexchange.com/questions/854039/biology-how-to-find-the-probability-of-randomly-generating-multiple-sequential
 
 19. https://math.stackexchange.com/questions/911571/probability-rolling-a-dice-5-times/
+
+20. https://math.stackexchange.com/questions/1334544/off-by-1-lottery-probability/
