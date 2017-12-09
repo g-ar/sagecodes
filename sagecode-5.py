@@ -72,3 +72,18 @@ def calc(n):
     return res
 
 print calc(10)[1]
+
+# (23) https://puzzling.stackexchange.com/questions/57583/how-many-tries-to-roll-a-6
+# expected number of 6 sided dice throws such that a 6 appears before any odd number
+import numpy as np
+
+nsum = 0
+cnt = 0
+ntrials = 1000000
+for _ in range(ntrials):
+    a = np.random.randint(1,7,100)
+    if np.where((a==1)|(a==3)|(a==5))[0][0] > np.where(a == 6)[0][0]:
+        cnt += 1
+        nsum += np.where(a == 6)[0][0]+1
+
+print nsum/float(cnt)
